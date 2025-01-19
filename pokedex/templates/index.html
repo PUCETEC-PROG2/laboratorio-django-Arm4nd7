@@ -2,41 +2,28 @@
 {% block title %}Pagina Inicial{% endblock title %}
 {% block content %}
     <p class="p-2">Lista de  Pokemones</p>
-    {% if user.is_authenticated %}
-        <a href="{% url "pokedex:add_pokemon" %}">Añadir Pokemon</a>
-    {% endif %}
     <div class="row">
         {% for pokemon in pokemons %}
         <div class="col-sm-4">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{pokemon.picture.url}}" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">{{ pokemon | capfirst }}</h5>
-                  <p class="card-text">Altura: {{pokemon.height}}</p>
-                  <a href="{{pokemon.id}}" class="btn btn-primary">
-                    <i class="fa-solid fa-eye"></i>
+            <div class="card" style="width: 12rem;">
+              <img class="card-img-top" src="{{pokemon.picture.url}}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{ pokemon | capfirst }}</h5>
+                <p class="card-text">Altura: {{pokemon.height}}</p>
+                <a href="{{pokemon.id}}" class="btn btn-primary">
+                  <i class="fa-solid fa-eye"></i>
+                </a>
+                {% if user.is_authenticated %}
+                  <a href="edit_pokemon/{{pokemon.id}}" class="btn btn-primary">
+                    <i class="fa-solid fa-pencil"></i>
                   </a>
-                  {% if user.is_authenticated %}
-                      <a href="edit_pokemon/{{pokemon.id}}" class="btn btn-primary">
-                        <i class="fa-solid fa-pencil"></i>
-                      </a>
-
-                      <a href="delete_pokemon/{{pokemon.id}}" class="btn btn-danger">
-                        <i class="fa-solid fa-trash"></i>
-                      </a>
-                  {% endif %}
-                 
-                </div>
-              </div>
+                  <a href="delete_pokemon/{{pokemon.id}}" class="btn btn-danger">
+                    <i class="fa-solid fa-trash"></i>
+                  </a>
+                {% endif %}  
+              </div> 
+            </div>
         </div>
         {% endfor %}
     </div>
-    <p class="p-2">Lista de  Entrenadores</p>
-    <ul class="list-group">
-        {% for trainer in trainers %}
-        <li class="list-group-item">
-            <a href="trainer/{{trainer.id}}">{{trainer}}</a>
-        </li>
-        {% endfor %}
-    </ul>
 {% endblock content %}

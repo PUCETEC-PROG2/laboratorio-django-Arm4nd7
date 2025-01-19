@@ -1,4 +1,13 @@
+
 .logo{
     width: 35rem;
     height: auto;
+}
+
+nav{
+    font-size: large;
+    background-color: darkgoldenrod;
+}
+nav div ul{
+    margin: 0%;
 }
